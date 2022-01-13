@@ -34,22 +34,67 @@ function addBookToLibrary() {
   displayLibrary(myLibrary);
 }
 
+function deleteBook(event) {
+  myLibrary.splice((event.target.id - 1), 1);
+  displayLibrary(myLibrary);
+}
+
+function changeReadStatus(event) {
+  if(myLibrary[(event.target.id - 1)].read === 'Already read') {
+    myLibrary[(event.target.id - 1)].read = 'Not read yet';
+  }
+  else if(myLibrary[(event.target.id - 1)].read === 'Not read yet') {
+    myLibrary[(event.target.id - 1)].read = 'Already read';
+  }
+  displayLibrary(myLibrary);
+}
+
 function displayLibrary(library) {
   const bookList = document.getElementById('bookList');
   libraryTab.removeChild(bookList);
   const newList = document.createElement('ul');
   newList.id = 'bookList';
-  for (let book in library) {
+  if(myLibrary.length === 0) {
     const bookLine = document.createElement('li');
-    bookLine.id = 'book' + (Number(book) + 1);
-    bookLine.innerHTML = library[book].info();
+    bookLine.id = 'defaultLine';
+    bookLine.innerHTML = 'No books yet';
     newList.appendChild(bookLine);
   }
+  else {
+    for (let book in library) {
+      const bookLine = document.createElement('li');
+      bookLine.id = Number(book) + 1;
+      bookLine.innerHTML = library[book].info();
+
+      const deleteButton = document.createElement('button');
+      deleteButton.id = bookLine.id;
+      deleteButton.className = 'deleteBook';
+      deleteButton.innerHTML = 'DELETE BOOK';
+      bookLine.appendChild(deleteButton);
+
+      const readStatusButton = document.createElement('button');
+      readStatusButton.id = bookLine.id;
+      readStatusButton.className = 'changeReadStatus';
+      readStatusButton.innerHTML = 'CHANGE READ STATUS';
+      bookLine.appendChild(readStatusButton);
+
+      newList.appendChild(bookLine);
+    }
+  }
   libraryTab.appendChild(newList);
+  const deleteButtons = document.querySelectorAll('.deleteBook');
+  for(let i=0; i<deleteButtons.length; i++) {
+    deleteButtons[i].addEventListener('click', deleteBook);
+  }
+
+  const readStatusButtons = document.querySelectorAll('.changeReadStatus');
+  for(let i=0; i<readStatusButtons.length; i++) {
+    readStatusButtons[i].addEventListener('click', changeReadStatus);
+  }
 }
 
 const addBookButton = document.createElement('button');
-addBookButton.innerHTML = 'Add a new book';
+addBookButton.innerHTML = 'ADD A NEW BOOK';
 addBookButton.id = 'addBookButton';
 
 libraryTab.appendChild(addBookButton);
@@ -63,6 +108,8 @@ list.appendChild(line);
 libraryTab.appendChild(list);
 
 addBookButton.addEventListener('click', addBookToLibrary);
+
+
 
 /*
 
