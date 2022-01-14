@@ -1,0 +1,46 @@
+#title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+#libraryTab {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+#addBookButton {
+    display: inline-block;
+    align-self: flex-start;
+    background-color: rgb(123, 158, 255);
+    border: 1px solid black;
+    padding: 10px;
+    margin-left: 40px;
+    margin-bottom: 20px;
+    font-size: 17px;
+}
+
+.deleteBook {
+    margin-left: 25px;
+    background-color: red;
+    border: 1px solid black;
+    display: inline-block;
+    padding: 5px;
+}
+
+.changeReadStatus {
+    margin-left: 25px;
+    background-color: yellow;
+    border: 1px solid black;
+    display: inline-block;
+    padding: 5px;
+}
+
+.bookLines {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-size: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

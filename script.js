@@ -10,22 +10,19 @@ function Book (title, author, pages, read) {
 };
 
 Book.prototype.info = function () {
-  return this.title + ', by ' + this.author + ', ' + this.pages + ' pages, ' + this.read.toLowerCase() + '.';
+  return 'NAME : ' + this.title + ' | AUTHOR : ' + this.author + ' | NUMBER OF PAGES : ' + this.pages + ' | READ : ' + this.read;
 };
 
 function addBookToLibrary() {
-  const title = prompt('Please enter the name of the book to add to the library : ');
-  const author = prompt('Please enter the name of its author : ');
+  const title = prompt('Please enter the name of the book to add to the library : ').toUpperCase();
+  const author = prompt('Please enter the name of its author : ').toUpperCase();
   const pages = prompt('Please enter the number of pages this book contains : ');
-  let read = prompt('Please enter if you read it or not (Y for Yes/N for No) : ');
+  let read = prompt('Please enter if you read it or not (Y for Yes/N for No) : ').toUpperCase();
   if(read === 'Y') {
-    read = 'Already read';
+    read = 'YES';
   }
   else if(read === 'N') {
-    read = 'Not read yet';
-  }
-  else{
-    read = 'No information about reading status yet';
+    read = 'NO';
   }
   if (title !== null && author !== null && pages !== null) {
     let book = new Book(title, author, pages, read);
@@ -40,11 +37,11 @@ function deleteBook(event) {
 }
 
 function changeReadStatus(event) {
-  if(myLibrary[(event.target.id - 1)].read === 'Already read') {
-    myLibrary[(event.target.id - 1)].read = 'Not read yet';
+  if(myLibrary[(event.target.id - 1)].read === 'YES') {
+    myLibrary[(event.target.id - 1)].read = 'NO';
   }
-  else if(myLibrary[(event.target.id - 1)].read === 'Not read yet') {
-    myLibrary[(event.target.id - 1)].read = 'Already read';
+  else if(myLibrary[(event.target.id - 1)].read === 'NO') {
+    myLibrary[(event.target.id - 1)].read = 'YES';
   }
   displayLibrary(myLibrary);
 }
@@ -57,20 +54,16 @@ function displayLibrary(library) {
   if(myLibrary.length === 0) {
     const bookLine = document.createElement('li');
     bookLine.id = 'defaultLine';
-    bookLine.innerHTML = 'No books yet';
+    bookLine.className = 'bookLines';
+    bookLine.innerHTML = 'NO BOOKS';
     newList.appendChild(bookLine);
   }
   else {
     for (let book in library) {
       const bookLine = document.createElement('li');
       bookLine.id = Number(book) + 1;
+      bookLine.className = 'bookLines';
       bookLine.innerHTML = library[book].info();
-
-      const deleteButton = document.createElement('button');
-      deleteButton.id = bookLine.id;
-      deleteButton.className = 'deleteBook';
-      deleteButton.innerHTML = 'DELETE BOOK';
-      bookLine.appendChild(deleteButton);
 
       const readStatusButton = document.createElement('button');
       readStatusButton.id = bookLine.id;
@@ -78,7 +71,16 @@ function displayLibrary(library) {
       readStatusButton.innerHTML = 'CHANGE READ STATUS';
       bookLine.appendChild(readStatusButton);
 
+      const deleteButton = document.createElement('button');
+      deleteButton.id = bookLine.id;
+      deleteButton.className = 'deleteBook';
+      deleteButton.innerHTML = 'DELETE BOOK';
+      bookLine.appendChild(deleteButton);
+
       newList.appendChild(bookLine);
+
+      const spaceLine = document.createElement('hr');
+      newList.appendChild(spaceLine);
     }
   }
   libraryTab.appendChild(newList);
@@ -103,7 +105,8 @@ const list = document.createElement('ul');
 list.id = 'bookList';
 const line = document.createElement('li');
 line.id = 'defaultLine';
-line.innerHTML = 'No books yet';
+line.className = 'bookLines';
+line.innerHTML = 'NO BOOKS';
 list.appendChild(line);
 libraryTab.appendChild(list);
 
