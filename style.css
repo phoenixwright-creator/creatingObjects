@@ -7,6 +7,8 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: column;
+    margin-left: 40px;
+    margin-right: 40px;
 }
 
 #addBookButton {
@@ -15,7 +17,6 @@
     background-color: rgb(123, 158, 255);
     border: 1px solid black;
     padding: 10px;
-    margin-left: 40px;
     margin-bottom: 20px;
     font-size: 17px;
 }
@@ -36,11 +37,29 @@
     padding: 5px;
 }
 
-.bookLines {
-    display: flex;
-    flex-wrap: wrap;
+#defaultLibrary {
+    background-color: burlywood;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    height: 50px;
     align-items: center;
-    font-size: 15px;
-    margin-top: 15px;
-    margin-bottom: 15px;
+}
+
+.bookLine {
+    background-color: rgba(255, 0, 0, 0.582);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    justify-items: center;
+    height: 50px;
+    align-items: center;
+}
+
+.cell {
+    border: 1px solid black;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

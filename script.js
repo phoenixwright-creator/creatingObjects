@@ -47,20 +47,57 @@ function changeReadStatus(event) {
 }
 
 function displayLibrary(library) {
-  const bookList = document.getElementById('bookList');
-  libraryTab.removeChild(bookList);
-  const newList = document.createElement('ul');
-  newList.id = 'bookList';
-  if(myLibrary.length === 0) {
-    const bookLine = document.createElement('li');
-    bookLine.id = 'defaultLine';
-    bookLine.className = 'bookLines';
-    bookLine.innerHTML = 'NO BOOKS';
-    newList.appendChild(bookLine);
+  const oldLibraryContent = document.getElementById('libraryContent');
+  console.log(oldLibraryContent);
+  if(oldLibraryContent !== null){
+    libraryTab.removeChild(oldLibraryContent);
   }
+
+  const newLibraryContent = document.createElement('div');
+  newLibraryContent.id = 'libraryContent';
+
+  if(library.length === 0) {
+    const emplyContent = document.createElement('div');
+    emplyContent.id = 'emplyContent';
+    emplyContent.className = 'bookLines';
+    emplyContent.innerHTML = 'NO BOOKS';
+    libraryTab.appendChild(emplyContent);
+  }
+
   else {
+    
     for (let book in library) {
-      const bookLine = document.createElement('li');
+      const newBook = document.createElement('div');
+      newBook.id = 'book' + book;
+      newBook.className = 'bookLine';
+
+      const bookName = document.createElement('div');
+      bookName.id = 'bookName';
+      bookName.className = 'bookName cell';
+      bookName.innerHTML = library[book].title;
+      newBook.appendChild(bookName);
+
+      const authorName = document.createElement('div');
+      authorName.id = 'authorName';
+      authorName.className = 'authorName cell';
+      authorName.innerHTML = library[book].author;
+      newBook.appendChild(authorName);
+
+      const pagesNumber = document.createElement('div');
+      pagesNumber.id = 'pagesNumber';
+      pagesNumber.className = 'pagesNumber cell';
+      pagesNumber.innerHTML = library[book].pages;
+      newBook.appendChild(pagesNumber);
+
+      const readStatus = document.createElement('div');
+      readStatus.id = 'readStatus';
+      readStatus.className = 'readStatus cell';
+      readStatus.innerHTML = library[book].read;
+      newBook.appendChild(readStatus);
+
+      newLibraryContent.appendChild(newBook);
+
+      /*const bookLine = document.createElement('div');
       bookLine.id = Number(book) + 1;
       bookLine.className = 'bookLines';
       bookLine.innerHTML = library[book].info();
@@ -80,10 +117,14 @@ function displayLibrary(library) {
       newList.appendChild(bookLine);
 
       const spaceLine = document.createElement('hr');
-      newList.appendChild(spaceLine);
+      newList.appendChild(spaceLine);*/
+      
     }
+
+    libraryTab.appendChild(newLibraryContent);
   }
-  libraryTab.appendChild(newList);
+
+  /*
   const deleteButtons = document.querySelectorAll('.deleteBook');
   for(let i=0; i<deleteButtons.length; i++) {
     deleteButtons[i].addEventListener('click', deleteBook);
@@ -93,6 +134,8 @@ function displayLibrary(library) {
   for(let i=0; i<readStatusButtons.length; i++) {
     readStatusButtons[i].addEventListener('click', changeReadStatus);
   }
+  */
+
 }
 
 const addBookButton = document.createElement('button');
@@ -101,14 +144,44 @@ addBookButton.id = 'addBookButton';
 
 libraryTab.appendChild(addBookButton);
 
-const list = document.createElement('ul');
+const defaultLibrary = document.createElement('div');
+defaultLibrary.id = 'defaultLibrary';
+defaultLibrary.className = 'library';
+
+const nameDiv = document.createElement('div');
+nameDiv.id = 'nameDiv';
+nameDiv.className = 'nameDiv cell';
+nameDiv.innerHTML = 'NAME';
+defaultLibrary.appendChild(nameDiv);
+
+const authorDiv = document.createElement('div');
+authorDiv.id = 'authorDiv';
+authorDiv.className = 'authorDiv cell';
+authorDiv.innerHTML = 'AUTHOR';
+defaultLibrary.appendChild(authorDiv);
+
+const pagesDiv = document.createElement('div');
+pagesDiv.id = 'pagesDiv';
+pagesDiv.className = 'pagesDiv cell';
+pagesDiv.innerHTML = 'PAGES';
+defaultLibrary.appendChild(pagesDiv);
+
+const statusDiv = document.createElement('div');
+statusDiv.id = 'statusDiv';
+statusDiv.className = 'statusDiv cell';
+statusDiv.innerHTML = 'READ';
+defaultLibrary.appendChild(statusDiv);
+
+libraryTab.appendChild(defaultLibrary);
+
+/*const list = document.createElement('div');
 list.id = 'bookList';
-const line = document.createElement('li');
+const line = document.createElement('div');
 line.id = 'defaultLine';
 line.className = 'bookLines';
 line.innerHTML = 'NO BOOKS';
 list.appendChild(line);
-libraryTab.appendChild(list);
+libraryTab.appendChild(list);*/
 
 addBookButton.addEventListener('click', addBookToLibrary);
 
