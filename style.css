@@ -14,42 +14,16 @@
 #addBookButton {
     display: inline-block;
     align-self: flex-start;
-    background-color: rgb(123, 158, 255);
+    background-color: rgb(128, 162, 255);
     border: 1px solid black;
     padding: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
     font-size: 17px;
 }
 
-.deleteBook {
-    margin-left: 25px;
-    background-color: red;
-    border: 1px solid black;
-    display: inline-block;
-    padding: 5px;
-}
-
-.changeReadStatus {
-    margin-left: 25px;
-    background-color: yellow;
-    border: 1px solid black;
-    display: inline-block;
-    padding: 5px;
-}
-
-#defaultLibrary {
-    background-color: burlywood;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    justify-items: center;
-    height: 50px;
-    align-items: center;
-}
-
 .bookLine {
-    background-color: rgba(255, 0, 0, 0.582);
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 15%);
     justify-items: center;
     height: 50px;
     align-items: center;
@@ -62,4 +36,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.changeReadStatus, .deleteBook {
+    width: 75%;
+    height: 75%;
+}
+
+.color1 {
+    background-color: rgb(201, 201, 201);
+}
+
+.color2 {
+    background-color: rgb(217, 237, 255);
+}
+
+.info {
+    background-color: yellow;
+}
+
+.danger {
+    background-color: red;
 }
